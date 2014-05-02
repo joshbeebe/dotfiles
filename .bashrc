@@ -6,7 +6,7 @@
 [[ $- != *i* ]] && return
 
 alias ls='ls --color=auto'
-PS1='╔═[\e[1;33m\e[m\t][\w]\n╚» '
+PS1='╔═[\e[1;33m\e[m\t]\u@\h[\w]\n╚» '
 
 alias la='ls -a'
 

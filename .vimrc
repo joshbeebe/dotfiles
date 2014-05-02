@@ -2,7 +2,7 @@
 set ai
 
 "Set tab to 4 spaces
-set ts=4 sts=4 sw=4 noexpandtab
+set ts=4 sts=4 sw=4 expandtab
 
 "visible tabs
 set list listchars=trail:¤,tab:├\ 
@@ -26,9 +26,12 @@ set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ 
 "Set leader to ,
 let mapleader="\<Space>"
 
+"turn on file type
+filetype plugin on
+
 "Set keys for window management
 "next window
-nnoremap <Leader>ww <C-w><C-w> 
+nnoremap <Leader>ww <C-w><C-w>
 "close window
 nnoremap <Leader>wq :hide<CR>
 "new window
@@ -42,6 +45,15 @@ nnoremap <Leader>s :w<CR>
 "make ; function as :
 nnoremap ; :
 
+"<Leader>[ and ] switch buffers
+nnoremap <Leader>[ :bprev<CR>
+nnoremap <Leader>] :bnext<CR>
+
+"bind clear and make to F5
+nnoremap <F5> :!clear<CR> :make<CR>
+
+"autocmd BufWinLeave *.* mkview
+"autocmd BufWinEnter *.* silent loadview
 
 " Returns true if paste mode is enabled
 function! HasPaste()
