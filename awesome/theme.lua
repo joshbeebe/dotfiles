@@ -73,7 +73,7 @@ theme.titlebar_maximized_button_normal_active = "/home/josh/.config/awesome/them
 theme.titlebar_maximized_button_focus_active  = "/home/josh/.config/awesome/themes/default/titlebar/maximized_focus_active.png"
 
 --theme.wallpaper = "/home/josh/.config/awesome/themes/default/pripyat2.jpg"
-theme.wallpaper = "/home/josh/pictures/9qrrS06.jpg"
+theme.wallpaper = "/home/josh/pictures/background.jpg"
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = "/home/josh/.config/awesome/themes/default/layouts/fairhw.png"

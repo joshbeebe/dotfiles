@@ -20,7 +20,7 @@ alias wifi='sudo wifi-menu wlo1'
 
 alias amix='alsamixer'
 
-alias x='xswitch d'
+alias x='startx'
 alias n='xswitch n'
 
 alias emacs="emacs -nw"

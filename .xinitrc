@@ -1,4 +1,4 @@
-xrdb ~/.Xresources
+xrdb -merge ~/.Xresources
 xmodmap ~/.Xmodmap
 xcape -e "Control_L=Escape"
 
