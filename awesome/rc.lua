@@ -41,7 +41,7 @@ end
 beautiful.init("/home/josh/.config/awesome/themes/default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "urxvt"
+terminal = "kitty"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -55,13 +55,13 @@ modkey = "Mod4"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 local layouts =
 {
+    awful.layout.suit.spiral,
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
     awful.layout.suit.tile.top,
     awful.layout.suit.fair,
     awful.layout.suit.fair.horizontal,
-    awful.layout.suit.spiral,
     awful.layout.suit.spiral.dwindle,
 --    awful.layout.suit.max,
     awful.layout.suit.floating
@@ -247,15 +247,14 @@ globalkeys = awful.util.table.join(
 
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
-    awful.key({ modkey,           }, "c", function () awful.util.spawn("chromium") end),
-    awful.key({        }, "XF86HomePage", function () awful.util.spawn("chromium") end),
+    awful.key({ modkey,           }, "c", function () awful.util.spawn("google-chrome-stable") end),
+    awful.key({        }, "XF86HomePage", function () awful.util.spawn("google-chrome-stable") end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
---    awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
-
-    awful.key({ modkey,           }, "l",     function () awful.util.spawn("sudo pm-suspend")    end),
-    awful.key({ modkey, "Shift", "Control"          }, "l",     function () awful.tag.incmwfact( 0.05)    end),
+    awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
+    --awful.key({ modkey,           }, "l",     function () awful.util.spawn("sudo pm-suspend")    end),
+    --awful.key({ modkey, "Shift", "Control"          }, "l",     function () awful.tag.incmwfact( 0.05)    end),
     awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)    end),
     awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1)      end),
     awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1)      end),
@@ -383,7 +382,8 @@ awful.rules.rules = {
          border_color = beautiful.border_normal,
          focus = awful.client.focus.filter,
          keys = clientkeys,
-         buttons = clientbuttons } },
+         buttons = clientbuttons,
+         titlebars_enabled = true } },
     { rule = { class = "MPlayer" },
       properties = { floating = true } },
     { rule = { class = "pinentry" },
@@ -394,7 +394,12 @@ awful.rules.rules = {
     -- { rule = { class = "Firefox" },
     --   properties = { tag = tags[1][2] } },
     { rule = { class = "vlc" },
-      properties = { tag = tags[1][5] } },
+      properties = { tag = tags[1][6] } },
+    { rule = { class = "discord"}, 
+      properties = {tag = tags[1][5], 
+                    border_width = 0 } },
+    { rule = {class = "code"},
+      properties = {tag = tags[1][4]} },
 }
 -- }}}
 
