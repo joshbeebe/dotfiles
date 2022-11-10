@@ -1,0 +1,79 @@
+#!/usr/bin/env python3
+import os
+import sys
+import git
+import subprocess
+
+aur_path = '/home/josh/aur'
+
+class MyProgressPrinter(git.RemoteProgress):
+    def update(self, op_code, cur_count, max_count=None, message=""):
+        print(
+            op_code,
+            cur_count,
+            max_count,
+            cur_count / (max_count or 100.0),
+            message or "NO MESSAGE",
+        )
+
+def clone_aur_package(pkg):
+    git.Repo.clone_from(f'https://aur.archlinux.org/{pkg}.git', f'{aur_path}/{pkg}')
+
+def makepkg(pkg):
+    working_dir = os.getcwd()
+    os.chdir(f'{aur_path}/{pkg}')
+    subprocess.call(['makepkg', '-si', f'{aur_path}/{pkg}'])
+    os.chdir(working_dir)
+
+def install_package(pkg):
+    subprocess.call(['makepkg', '-i', f'{aur_path}/{pkg}'])
+
+def install(pkg):
+    clone_aur_package(pkg)
+    makepkg(pkg)
+    # install_package(pkg)
+
+def update():
+    for item in os.listdir(aur_path):
+        print(f'Updating {item}')
+        r = git.Repo(f'{aur_path}/{item}')
+        # print(r.remotes['origin'].repo.index.diff()[0])
+        # print(r.remotes['origin'].pull(progress=MyProgressPrinter())[0])
+        ab = r.active_branch
+        r.remotes.origin.fetch()
+        commits_behind = sum(1 for c in r.iter_commits(f'{ab}..origin/{ab}'))
+        if commits_behind == 0:
+            print('  Up to date.')
+        else:
+            print('  Pulling files...')
+            r.remotes['origin'].pull()
+            print('  Installing...')
+            makepkg(item)
+            print('  Done.')
+
+def search(pkg):
+    subprocess.call(['google-chrome-stable', f'https://aur.archlinux.org/packages?O=0&K={pkg}'])
+    subprocess.call(['hyprctl', 'dispatch', 'workspace', '1'])
+
+function_map = {
+    'clone': clone_aur_package,
+    'makepkg': makepkg,
+    'install_package': install_package,
+    'install': install,
+    'update': update,
+    'search': search
+}
+def main():
+    if not os.path.exists(aur_path):
+        os.mkdir(aur_path)
+
+    if len(sys.argv) > 2:
+        function_map[sys.argv[1]](sys.argv[2])
+    elif len(sys.argv) > 1:
+        function_map[sys.argv[1]]()
+        
+    return
+
+
+if __name__ == '__main__':
+    main()

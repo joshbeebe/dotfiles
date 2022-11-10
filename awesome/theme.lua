@@ -4,22 +4,22 @@
 
 theme = {}
 
-theme.font          = "sans 8"
+theme.font          = "sans 10"
 
-theme.bg_normal     = "#222222"
-theme.bg_focus      = "#1692d0"    --"#535d6c"
+theme.bg_normal     = "#888899"
+theme.bg_focus      = "#a7c1cf"    --"#535d6c"
 theme.bg_urgent     = "#ff0000"
 theme.bg_minimize   = "#444444"
 theme.bg_systray    = theme.bg_normal
 
-theme.fg_normal     = "#aaaaaa"
-theme.fg_focus      = "#ffffff"
+theme.fg_normal     = "#111111"
+theme.fg_focus      = "#000000"
 theme.fg_urgent     = "#ffffff"
 theme.fg_minimize   = "#ffffff"
 
 theme.border_width  = 4
 theme.border_normal = "#000000"
-theme.border_focus  = "#9bbef2"
+theme.border_focus  = theme.bg_focus   --"#9bbef2"
 theme.border_marked = "#91231c"
 
 -- There are other variable sets

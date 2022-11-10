@@ -31,5 +31,20 @@ cp -r /usr/share/awesome/icons ~/.config/awesome/
 echo "Copying taglist"
 cp -r /usr/share/awesome/themes/default/taglist ~/.config/awesome/themes/default/
 
+echo "Linking sway config"
+mkdir -p ~/.config/sway/
+rm ~/.config/sway/config
+ln -s $PWD/sway/config ~/.config/sway/config
+
+echo "Linking hyprland"
+mkdir -p ~/.config/hypr/
+rm ~/.config/hypr/hyprland.conf
+ln -s $PWD/hyprland/hyprland.conf ~/.config/hypr/hyprland.conf
+
+echo "Linking waybar"
+mkdir -p ~/.config/waybar
+rm ~/.config/waybar/config
+ln -s $PWD/waybar/config ~/.config/waybar/config
+
 echo "Done."
 

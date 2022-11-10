@@ -27,3 +27,7 @@ alias wifi='sudo wifi-menu wlo1'
 alias amix='alsamixer'
 
 alias x='startx'
+alias h='hyprland.sh'
+
+path+=('/home/josh/dotfiles/bin')
+export PATH
