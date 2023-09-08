@@ -74,6 +74,9 @@ map <F1> :TagbarToggle<CR>
 " Toggle the NERDTree file browser
 map <F2> :NERDTreeToggle<CR>
 
+"Fix snipmate
+let g:snipMate = {'snippet_version' : 1 }
+
 
 "Pathogen
 execute pathogen#infect()

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-links=".bashrc .vimrc .xinitrc .Xresources .zshrc"
+links=".bashrc .vimrc .xinitrc .Xresources .zshrc .bash_profile"
 
 setup_dotfiles() {
 	for i in $links; do
@@ -58,9 +58,10 @@ setup_waybar() {
 	ln -s $PWD/waybar/config ~/.config/waybar/config
 }
 
-setup_hyprland
-setup_kitty
-setup_waybar
+#setup_hyprland
+#setup_kitty
+#setup_waybar
+setup_dotfiles
 
 echo "Done."
 
