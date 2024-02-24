@@ -25,4 +25,9 @@ alias n='xswitch n'
 
 alias emacs="emacs -nw"
 
+if [ -z "${WAYLAND_DISPLAY}" ] && [ $(tty) = "/dev/tty1" ]; then
+    export XCURSOR_SIZE=24
+    dbus-run-session Hyprland
+fi
+
 PATH=$PATH:~/.bin

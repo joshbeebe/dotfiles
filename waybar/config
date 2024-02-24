@@ -5,10 +5,35 @@
     // "width": 1280, // Waybar width
     "spacing": 4, // Gaps between modules (4px)
     // Choose the order of the modules
-    "modules-left": ["wlr/workspaces", "wlr/mode", "wlr/scratchpad", "custom/media"],
-    "modules-center": ["wlr/window"],
+    "modules-left": ["hyprland/workspaces", "wlr/workspaces", "wlr/mode", "wlr/scratchpad", "custom/media"],
+    "modules-center": ["hyprland/window"],
     "modules-right": ["idle_inhibitor", "pulseaudio", "network", "cpu", "memory", "temperature", "backlight", "keyboard-state", "wlr/language", "battery", "battery#bat2", "clock", "tray"],
     // Modules configuration
+    "hyprland/workspaces": {
+        "on-click": "activate",
+        "disable-scroll": true,
+        "all-outputs": true,
+        "active-only": false,
+        "format": "{name}: {icon}",
+        // This doesn't exist for wlr, only sway :(
+        "persistent_workspaces": {
+            // "*": 5
+            "1": ["*"],
+            "2": ["*"],
+            "3": ["*"],
+            "4": ["*"]
+        },
+        "format-icons": {
+            "1": "",
+            "2": "",
+            "3": "",
+            "4": "",
+            "5": "",
+            "urgent": "",
+            "focused": "",
+            "default": ""
+        }
+    },
     "wlr/workspaces": {
         "on-click": "activate",
         "disable-scroll": true,
@@ -17,14 +42,15 @@
         "format": "{name}: {icon}",
         // This doesn't exist for wlr, only sway :(
         // "persistent_workspaces": {
+        "persistent_workspaces": {
+            "*": 5
         //     "1": [],
         //     "2": [],
         //     "3": [],
         //     "4": []
-        // },
+        },
         "format-icons": {
-            //"1": "",
-            "1": "T",
+            "1": "",
             "2": "",
             "3": "",
             "4": "",
@@ -136,7 +162,7 @@
         "bat": "BAT2"
     },
     "network": {
-        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "interface": "wlp166s0", // (Optional) To force the use of this interface
         "format-wifi": "{essid} ({signalStrength}%) ",
         "format-ethernet": "{ipaddr}/{cidr} ",
         "tooltip-format": "{ifname} via {gwaddr} ",
