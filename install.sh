@@ -55,13 +55,23 @@ setup_waybar() {
 	echo "Linking waybar"
 	mkdir -p ~/.config/waybar
 	rm ~/.config/waybar/config
+	rm ~/.config/waybar/style.css
 	ln -s $PWD/waybar/config ~/.config/waybar/config
+	ln -s $PWD/waybar/style.css ~/.config/waybar/style.css
+}
+
+setup_wofi() {
+	echo "Linking wofi"
+	mkdir -p ~/.config/wofi
+	rm ~/.config/wofi/config
+	ln -s $PWD/wofi/config ~/.config/wofi/config
 }
 
 #setup_hyprland
 #setup_kitty
-#setup_waybar
-setup_dotfiles
+setup_waybar
+#setup_dotfiles
+#setup_wofi
 
 echo "Done."
 

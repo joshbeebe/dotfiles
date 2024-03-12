@@ -22,7 +22,7 @@ def clone_aur_package(pkg):
 def makepkg(pkg):
     working_dir = os.getcwd()
     os.chdir(f'{aur_path}/{pkg}')
-    subprocess.call(['makepkg', '-si', f'{aur_path}/{pkg}'])
+    subprocess.call(['makepkg', '-sci', f'{aur_path}/{pkg}'])
     os.chdir(working_dir)
 
 def install_package(pkg):
@@ -33,7 +33,7 @@ def install(pkg):
     makepkg(pkg)
     # install_package(pkg)
 
-def update():
+def update(args=''):
     for item in os.listdir(aur_path):
         print(f'Updating {item}')
         r = git.Repo(f'{aur_path}/{item}')
@@ -44,12 +44,18 @@ def update():
         commits_behind = sum(1 for c in r.iter_commits(f'{ab}..origin/{ab}'))
         if commits_behind == 0:
             print('  Up to date.')
-        else:
-            print('  Pulling files...')
-            r.remotes['origin'].pull()
-            print('  Installing...')
-            makepkg(item)
-            print('  Done.')
+            return
+        elif 'confirm' in args:
+            print(f'  {commits_behind} commit{"" if commits_behind == 1 else "s"} behind')
+            print('  Update? (Y/n)')
+            resp = input()
+            if resp not in ['', 'y', 'Y']:
+                return
+        print('  Pulling files...')
+        r.remotes['origin'].pull()
+        print('  Installing...')
+        makepkg(item)
+        print('  Done.')
 
 def search(pkg):
     subprocess.call(['google-chrome-stable', f'https://aur.archlinux.org/packages?O=0&K={pkg}'])

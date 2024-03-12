@@ -5,7 +5,7 @@ set ai
 set ts=4 sts=4 sw=4 expandtab
 
 "visible tabs
-set list listchars=trail:¤,tab:├\ 
+"set list listchars=trail:¤,tab:├\ 
 
 "Always show current position
 set ruler

@@ -27,7 +27,9 @@ alias emacs="emacs -nw"
 
 if [ -z "${WAYLAND_DISPLAY}" ] && [ $(tty) = "/dev/tty1" ]; then
     export XCURSOR_SIZE=24
+    # Set XDG variables (maybe other things too?) for flatpak
+    /etc/profile.d/flatpak.sh
     dbus-run-session Hyprland
 fi
 
-PATH=$PATH:~/.bin
+PATH=$PATH:~/.bin:~/dotfiles/bin
