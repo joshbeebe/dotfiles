@@ -3,6 +3,7 @@ import os
 import sys
 import git
 import subprocess
+import Command
 
 aur_path = '/home/josh/aur'
 
@@ -16,24 +17,27 @@ class MyProgressPrinter(git.RemoteProgress):
             message or "NO MESSAGE",
         )
 
-def clone_aur_package(pkg):
+def clone_aur_package(**kwargs):
+    pkg = list(kwargs)[1]
     git.Repo.clone_from(f'https://aur.archlinux.org/{pkg}.git', f'{aur_path}/{pkg}')
 
-def makepkg(pkg):
+def makepkg(**kwargs):
+    pkg = list(kwargs)[1]
     working_dir = os.getcwd()
     os.chdir(f'{aur_path}/{pkg}')
     subprocess.call(['makepkg', '-sci', f'{aur_path}/{pkg}'])
     os.chdir(working_dir)
 
-def install_package(pkg):
+def install_package(**kwargs):
+    pkg = list(kwargs)[1]
     subprocess.call(['makepkg', '-i', f'{aur_path}/{pkg}'])
 
-def install(pkg):
-    clone_aur_package(pkg)
-    makepkg(pkg)
+def install(**kwargs):
+    clone_aur_package(**kwargs)
+    makepkg(**kwargs)
     # install_package(pkg)
 
-def update(args=''):
+def update(**kwargs):
     for item in os.listdir(aur_path):
         print(f'Updating {item}')
         r = git.Repo(f'{aur_path}/{item}')
@@ -44,20 +48,21 @@ def update(args=''):
         commits_behind = sum(1 for c in r.iter_commits(f'{ab}..origin/{ab}'))
         if commits_behind == 0:
             print('  Up to date.')
-            return
-        elif 'confirm' in args:
+            continue
+        elif 'confirm' in kwargs:
             print(f'  {commits_behind} commit{"" if commits_behind == 1 else "s"} behind')
             print('  Update? (Y/n)')
             resp = input()
             if resp not in ['', 'y', 'Y']:
-                return
+                continue
         print('  Pulling files...')
         r.remotes['origin'].pull()
         print('  Installing...')
         makepkg(item)
         print('  Done.')
 
-def search(pkg):
+def search(**kwargs):
+    pkg = list(kwargs)[1]
     subprocess.call(['google-chrome-stable', f'https://aur.archlinux.org/packages?O=0&K={pkg}'])
     subprocess.call(['hyprctl', 'dispatch', 'workspace', '1'])
 
@@ -72,11 +77,8 @@ function_map = {
 def main():
     if not os.path.exists(aur_path):
         os.mkdir(aur_path)
+    Command.Command(sys.argv, function_map)
 
-    if len(sys.argv) > 2:
-        function_map[sys.argv[1]](sys.argv[2])
-    elif len(sys.argv) > 1:
-        function_map[sys.argv[1]]()
         
     return
 

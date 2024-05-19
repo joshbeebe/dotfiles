@@ -1,2 +1,60 @@
 #!/usr/bin/env python3
+import sys
+import Command
+import Dotfile as DF
+from Dotfile import Dotfile, Dotfiles
 
+DF.Dotfile_local_home = '/home/josh'
+dotfile_map = Dotfiles([
+    Dotfile(
+        name = 'wofi',
+        path = '~/.config/wofi/',
+        local_path='~/dotfiles/wofi/',
+        files = [
+            'config'
+        ],
+    ),
+    Dotfile(
+        name = 'waybar',
+        path = '~/.config/waybar/',
+        local_path='~/dotfiles/waybar/',
+        files = [
+            'config',
+            'style.css'
+        ]
+    ),
+    Dotfile(
+        name = 'awesome',
+        path = '~/.config/awesome/',
+        local_path = '~/dotfiles/awesome/',
+        files = [
+            'rc.lua',
+            ('theme.lua', 'themes/default/theme.lua')
+        ],
+        extra_cmds = [
+            ['cp', '-r', '/usr/share/awesome/icons', '~/.config/awesome/'],
+            ['cp', '-r', '/usr/share/awesome/themes/default/taglist', '~/.config/awesome/themes/default/']
+        ]
+    ),
+    Dotfile('.bashrc'),
+    Dotfile('.vimrc'),
+    Dotfile('.xinitrc'),
+    Dotfile('.Xresources'),
+    Dotfile('.zshrc'),
+    Dotfile('.bash_profile')
+])
+
+def apply_fn(**kwargs):
+    dotfile = dotfile_map[list(kwargs)[1]]
+    file = list(kwargs)[2] if len(kwargs) > 2 else None
+    getattr(dotfile, list(kwargs)[0])(file)
+
+fn_map = {
+    'unlink': apply_fn,
+    'link': apply_fn,
+}
+def main():
+    Command.Command(sys.argv, fn_map)
+    
+if __name__ == '__main__':
+    main()
