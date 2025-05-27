@@ -2,10 +2,10 @@
 import sys
 import Command
 import Dotfile as DF
-from Dotfile import Dotfile, Dotfiles
+from Dotfile import Dotfile, Dotfiles, DotfileExecuter
 
 DF.Dotfile_local_home = '/home/josh'
-dotfile_map = Dotfiles([
+dotfiles = Dotfiles([
     Dotfile(
         name = 'wofi',
         path = '~/.config/wofi/',
@@ -44,17 +44,9 @@ dotfile_map = Dotfiles([
     Dotfile('.bash_profile')
 ])
 
-def apply_fn(**kwargs):
-    dotfile = dotfile_map[list(kwargs)[1]]
-    file = list(kwargs)[2] if len(kwargs) > 2 else None
-    getattr(dotfile, list(kwargs)[0])(file)
-
-fn_map = {
-    'unlink': apply_fn,
-    'link': apply_fn,
-}
 def main():
-    Command.Command(sys.argv, fn_map)
+    DotfileExecuter.dotfile_list = dotfiles
+    Command.Command(sys.argv, DotfileExecuter.fn_map)
     
 if __name__ == '__main__':
     main()

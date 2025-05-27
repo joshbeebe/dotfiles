@@ -3,6 +3,25 @@ import subprocess
 from pathlib import Path
 Dotfile_local_home: str = '~'
 
+class DotfileExecuter():
+    '''
+    Wrapper class to interface between Command and Dotfile classes
+    '''
+    dotfile_list = None
+
+    def apply_fn(**kwargs):
+        # global DotfileMap.dotfile_map
+        if DotfileExecuter.dotfile_list is None:
+            Exception('Error: No dotfile map set')
+        dotfile = DotfileExecuter.dotfile_list[list(kwargs)[1]]
+        file = list(kwargs)[2] if len(kwargs) > 2 else None
+        getattr(dotfile, list(kwargs)[0])(file)
+
+    fn_map = {
+        'unlink': apply_fn,
+        'link': apply_fn,
+    }
+
 class Dotfile():
     def __init__(self,name: str, 
                  files = None, 
