@@ -46,11 +46,12 @@ def update(**kwargs):
         ab = r.active_branch
         r.remotes.origin.fetch()
         commits_behind = sum(1 for c in r.iter_commits(f'{ab}..origin/{ab}'))
-        if commits_behind == 0:
+        if commits_behind == 0 and 'force' not in kwargs:
             print('  Up to date.')
             continue
-        elif 'confirm' in kwargs:
-            print(f'  {commits_behind} commit{"" if commits_behind == 1 else "s"} behind')
+
+        print(f'  {commits_behind} commit{"" if commits_behind == 1 else "s"} behind')
+        if 'confirm' in kwargs:
             print('  Update? (Y/n)')
             resp = input()
             if resp not in ['', 'y', 'Y']:
@@ -58,7 +59,7 @@ def update(**kwargs):
         print('  Pulling files...')
         r.remotes['origin'].pull()
         print('  Installing...')
-        makepkg(item)
+        makepkg(**{'dummy':0, item:item})
         print('  Done.')
 
 def search(**kwargs):
