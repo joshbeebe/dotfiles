@@ -1,0 +1,39 @@
+#!/bin/python
+'''
+Slightly wiggle mouse and toggle right mouse button.
+Timberborn has a weird issue with moving the camera where this is needed
+'''
+import subprocess
+import time
+from pathlib import Path
+import datetime
+import sys
+
+delay = .1
+offset = 1
+loops = 5
+tmp_file = Path('./~.mw_tmp')
+
+def main():
+    rel = (len(sys.argv) > 1 and sys.argv[1] == 'release')
+    if not rel:
+        if not tmp_file.exists():
+            for i in range(loops):
+                subprocess.call(['ydotool', 'mousemove', '--', f'{offset}', '0'])
+                time.sleep(delay)
+                subprocess.call(['ydotool', 'mousemove', '--', f'-{offset}', '0'])
+                subprocess.call(['ydotool', 'click', '0x41'])
+            tmp_file.write_text('')
+        else:
+            subprocess.call(['ydotool', 'click', '0x81'])
+            tmp_file.unlink()
+    else:
+        if (datetime.datetime.now() - datetime.datetime.fromtimestamp(tmp_file.stat().st_ctime)).microseconds > 250:
+            subprocess.call(['ydotool', 'click', '0x81'])
+            tmp_file.unlink()
+
+
+        
+
+if __name__ == '__main__':
+    main()
