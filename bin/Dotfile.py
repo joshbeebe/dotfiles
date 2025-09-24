@@ -42,6 +42,8 @@ class Dotfile():
         if files is None:
             # exp_name = f'/{name}'
             files = [name]
+        elif files is []:
+            files = os.listdir(local_path)
         self.files = files
         self.name = name
         self.extra_cmds = extra_cmds

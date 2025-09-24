@@ -30,6 +30,7 @@ if [ -z "${WAYLAND_DISPLAY}" ] && [ $(tty) = "/dev/tty1" ]; then
     # Set XDG variables (maybe other things too?) for flatpak
     /etc/profile.d/flatpak.sh
     dbus-run-session Hyprland
+    #/usr/lib/plasma-dbus-run-session-if-needed /usr/bin/startplasma-wayland
 fi
 
 PATH=$PATH:~/.bin:~/dotfiles/bin

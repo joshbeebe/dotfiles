@@ -36,6 +36,29 @@ dotfiles = Dotfiles([
             ['cp', '-r', '/usr/share/awesome/themes/default/taglist', '~/.config/awesome/themes/default/']
         ]
     ),
+    Dotfile(
+        name = 'hyprland',
+        path = '~/.config/hypr/',
+        local_path = '~/dotfiles/hyprland/',
+        files = [
+            'hyprland.conf',
+            'keybinds.conf'
+        ]
+    ),
+    Dotfile(
+        name = 'dunst',
+        path = '~/.config/dunst',
+        local_path = '~/dotfiles/dunst',
+        files = [
+            'dunstrc'
+        ]
+    ),
+    Dotfile(
+        name = 'quickshell',
+        path = '~/.config/quickshell',
+        local_path='~/dotfiles/quickshell',
+        files = []
+    ),
     Dotfile('.bashrc'),
     Dotfile('.vimrc'),
     Dotfile('.xinitrc'),
