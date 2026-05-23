@@ -1,0 +1,3 @@
+#!/bin/bash
+
+grep -v "^#" install_packages.txt | pacman -S --needed -

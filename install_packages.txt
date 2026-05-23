@@ -1,0 +1,17 @@
+discord
+dunst
+feh
+ffmpeg
+gimp
+grim
+hyprland
+kitty
+noto-fonts
+noto-fonts-cjk
+noto-fonts-emoji
+noto-fonts-extra
+ttf-fira-code
+waybar
+wev
+wofi
+#ydotool
