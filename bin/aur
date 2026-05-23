@@ -42,30 +42,37 @@ def install(**kwargs):
     makepkg(**kwargs)
     # install_package(pkg)
 
+def run_update(**kwargs):
+    item = kwargs['item']
+    print(f'Updating {item}')
+    r = git.Repo(f'{aur_path}/{item}')
+    # print(r.remotes['origin'].repo.index.diff()[0])
+    # print(r.remotes['origin'].pull(progress=MyProgressPrinter())[0])
+    ab = r.active_branch
+    r.remotes.origin.fetch()
+    commits_behind = sum(1 for c in r.iter_commits(f'{ab}..origin/{ab}'))
+    if commits_behind == 0 and 'force' not in kwargs:
+        print('  Up to date.')
+        return
+
+    print(f'  {commits_behind} commit{"" if commits_behind == 1 else "s"} behind')
+    if 'confirm' in kwargs:
+        print('  Update? (Y/n)')
+        resp = input()
+        if resp not in ['', 'y', 'Y']:
+            return
+    print('  Pulling files...')
+    r.remotes['origin'].pull()
+    print('  Installing...')
+    makepkg(**{'dummy':0, item:item})
+    print('  Done.')
+
+
 def update(**kwargs):
     for item in os.listdir(aur_path):
-        print(f'Updating {item}')
-        r = git.Repo(f'{aur_path}/{item}')
-        # print(r.remotes['origin'].repo.index.diff()[0])
-        # print(r.remotes['origin'].pull(progress=MyProgressPrinter())[0])
-        ab = r.active_branch
-        r.remotes.origin.fetch()
-        commits_behind = sum(1 for c in r.iter_commits(f'{ab}..origin/{ab}'))
-        if commits_behind == 0 and 'force' not in kwargs:
-            print('  Up to date.')
-            continue
-
-        print(f'  {commits_behind} commit{"" if commits_behind == 1 else "s"} behind')
-        if 'confirm' in kwargs:
-            print('  Update? (Y/n)')
-            resp = input()
-            if resp not in ['', 'y', 'Y']:
-                continue
-        print('  Pulling files...')
-        r.remotes['origin'].pull()
-        print('  Installing...')
-        makepkg(**{'dummy':0, item:item})
-        print('  Done.')
+        _kwargs = kwargs
+        _kwargs['item'] = item
+        run_update(**_kwargs)
 
 def search(**kwargs):
     pkg = list(kwargs)[1]
@@ -79,7 +86,8 @@ function_map = {
     'install': install,
     'update': update,
     'search': search,
-    'remove': remove
+    'remove': remove,
+    'runupdate': run_update
 }
 def main():
     if not os.path.exists(aur_path):
