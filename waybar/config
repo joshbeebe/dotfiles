@@ -15,6 +15,7 @@
         "disable-scroll": true,
         "all-outputs": true,
         "active-only": false,
+        "show-special": true,
         "format": "{name}: {icon}",
         // This doesn't exist for wlr, only sway :(
         "persistent_workspaces": {
@@ -142,7 +143,7 @@
         "bat": "BAT2"
     },
     "network": {
-        "interface": "wlan0", // (Optional) To force the use of this interface
+        // "interface": "wlan0", // (Optional) To force the use of this interface
         "format-wifi": "{essid} ({signalStrength}%) ",
         "format-ethernet": "{ipaddr}/{cidr} ",
         "tooltip-format": "{ifname} via {gwaddr} ",

@@ -9,7 +9,7 @@ from pathlib import Path
 import datetime
 import sys
 
-delay = .1
+delay = .035
 offset = 1
 loops = 5
 tmp_file = Path('./~.mw_tmp')
