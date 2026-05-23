@@ -1,26 +1,9 @@
 import os
 import subprocess
 from pathlib import Path
+from collections import defaultdict
 Dotfile_local_home: str = '~'
 
-class DotfileExecuter():
-    '''
-    Wrapper class to interface between Command and Dotfile classes
-    '''
-    dotfile_list = None
-
-    def apply_fn(**kwargs):
-        # global DotfileMap.dotfile_map
-        if DotfileExecuter.dotfile_list is None:
-            Exception('Error: No dotfile map set')
-        dotfile = DotfileExecuter.dotfile_list[list(kwargs)[1]]
-        file = list(kwargs)[2] if len(kwargs) > 2 else None
-        getattr(dotfile, list(kwargs)[0])(file)
-
-    fn_map = {
-        'unlink': apply_fn,
-        'link': apply_fn,
-    }
 
 class Dotfile():
     def __init__(self,name: str, 
@@ -28,6 +11,7 @@ class Dotfile():
                  path: str = '~', 
                  local_path: str = '~/dotfiles/',
                  extra_cmds: list[list[str]] = [],
+                 install_all: bool = True
                  ) -> None:
         """Represents a list of dotfiles for a program
 
@@ -47,6 +31,7 @@ class Dotfile():
         self.files = files
         self.name = name
         self.extra_cmds = extra_cmds
+        self.install_all = install_all
 
     def get_filename(self, file:str = None):
         filename = file if file is not None else self.files[0]
@@ -107,6 +92,36 @@ class Dotfile():
             fcmd = [s.replace('~',Dotfile_local_home) for s in cmd]
             print(fcmd)
             subprocess.run(fcmd)
+
+class DotfileExecuter():
+    '''
+    Wrapper class to interface between Command and Dotfile classes
+    '''
+    dotfile_list = defaultdict(Dotfile)
+
+    def apply_fn(**kwargs):
+        # global DotfileMap.dotfile_map
+        if DotfileExecuter.dotfile_list is {}:
+            Exception('Error: No dotfile map set')
+        dotfile = DotfileExecuter.dotfile_list[list(kwargs)[1]]
+        file = list(kwargs)[2] if len(kwargs) > 2 else None
+        getattr(dotfile, list(kwargs)[0])(file)
+
+    def list_all(**kwargs):
+        for dotfile_name, dotfile in DotfileExecuter.dotfile_list.items():
+            print(dotfile.name)
+
+    def link_all(**kwargs):
+        for dotfile_name, dotfile in DotfileExecuter.dotfile_list.items():
+            if dotfile.install_all:
+                dotfile.link()
+
+    fn_map = {
+        'unlink': apply_fn,
+        'link': apply_fn,
+        'list': list_all,
+        'link_all': link_all,
+    }
 
 def Dotfiles(dotfiles: list[Dotfile]) -> dict[str, Dotfile]:
     return {d.name:d for d in dotfiles}

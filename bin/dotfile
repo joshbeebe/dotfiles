@@ -34,7 +34,8 @@ dotfiles = Dotfiles([
         extra_cmds = [
             ['cp', '-r', '/usr/share/awesome/icons', '~/.config/awesome/'],
             ['cp', '-r', '/usr/share/awesome/themes/default/taglist', '~/.config/awesome/themes/default/']
-        ]
+        ],
+        install_all=False
     ),
     Dotfile(
         name = 'hyprland',
