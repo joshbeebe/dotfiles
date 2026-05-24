@@ -7,6 +7,14 @@ from Dotfile import Dotfile, Dotfiles, DotfileExecuter
 DF.Dotfile_local_home = '/home/josh'
 dotfiles = Dotfiles([
     Dotfile(
+        name = 'DankMaterialShell',
+        path = '~/.config/DankMaterialShell/',
+        local_path = '~/dotfiles/DankMaterialShell/',
+        files = [
+            'settings.json'
+        ]
+    ),
+    Dotfile(
         name = 'wofi',
         path = '~/.config/wofi/',
         local_path='~/dotfiles/wofi/',
