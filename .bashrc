@@ -29,7 +29,8 @@ if [ -z "${WAYLAND_DISPLAY}" ] && [ $(tty) = "/dev/tty1" ]; then
     export XCURSOR_SIZE=24
     # Set XDG variables (maybe other things too?) for flatpak
     /etc/profile.d/flatpak.sh
-    start-hyprland
+    #start-hyprland
+    niri-session
     # dbus-run-session Hyprland
     #/usr/lib/plasma-dbus-run-session-if-needed /usr/bin/startplasma-wayland
 fi

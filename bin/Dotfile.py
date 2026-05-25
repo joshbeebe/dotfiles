@@ -83,6 +83,10 @@ class Dotfile():
                 # os.symlink(local_fullpath, fullpath)
             except FileExistsError:
                 print('File already exists')
+                do_delete = input('Delete? (y/N)')
+                if do_delete == 'y':
+                    fullpath.unlink()
+                    print('Original file deleted.')
             print('Done.')
         else:
             print(f"File {local_fullpath} doesn't exist")

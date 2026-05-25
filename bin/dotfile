@@ -52,7 +52,8 @@ dotfiles = Dotfiles([
         files = [
             'hyprland.conf',
             'keybinds.conf'
-        ]
+        ],
+        install_all=False
     ),
     Dotfile(
         name = 'hyprland',
@@ -61,6 +62,22 @@ dotfiles = Dotfiles([
         files = [
             'hyprland.lua',
             'keybinds.lua',
+        ]
+    ),
+    Dotfile(
+        name = 'niri',
+        path = '~/.config/niri/',
+        local_path = '~/dotfiles/niri',
+        files = [
+            'config.kdl',
+            'dms/alttab.kdl',
+            'dms/binds.kdl',
+            'dms/colors.kdl',
+            'dms/cursor.kdl',
+            'dms/layout.kdl',
+            'dms/outputs.kdl',
+            'dms/windowrules.kdl',
+            'dms/wpblur.kdl'
         ]
     ),
     Dotfile(
