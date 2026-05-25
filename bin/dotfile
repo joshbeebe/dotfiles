@@ -46,12 +46,21 @@ dotfiles = Dotfiles([
         install_all=False
     ),
     Dotfile(
-        name = 'hyprland',
+        name = 'hyprland_old',
         path = '~/.config/hypr/',
         local_path = '~/dotfiles/hyprland/',
         files = [
             'hyprland.conf',
             'keybinds.conf'
+        ]
+    ),
+    Dotfile(
+        name = 'hyprland',
+        path = '~/.config/hypr/',
+        local_path = '~/dotfiles/hyprland/',
+        files = [
+            'hyprland.lua',
+            'keybinds.lua',
         ]
     ),
     Dotfile(
