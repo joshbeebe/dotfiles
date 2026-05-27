@@ -187,10 +187,12 @@ overview {
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
 // This line starts waybar, a commonly used bar for Wayland compositors.
-spawn-sh-at-startup "dms run"
+spawn-at-startup "dms" "run"
+spawn-at-startup "ydotoold" "~"
+// spawn-at-startup "dunst"
+spawn-at-startup "elecom_button_mapper"
 environment {
   XDG_CURRENT_DESKTOP "niri"
-  DESKTOP ":0"
 }
 hotkey-overlay {
     skip-at-startup
@@ -300,6 +302,11 @@ recent-windows {
         Alt+Shift+grave { previous-window filter="app-id"; }
     }
 }
+
+// Static Workspaces
+workspace "Browser"
+workspace "Chat"
+workspace "Cfg"
 
 // Include dms files
 include "dms/colors.kdl"

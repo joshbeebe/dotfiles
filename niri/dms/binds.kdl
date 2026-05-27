@@ -4,7 +4,7 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     // === Application Launchers ===
-    Mod+T hotkey-overlay-title="Open Terminal" { spawn "kitty"; }
+    Mod+Return hotkey-overlay-title="Open Terminal" { spawn "kitty"; }
     Mod+Space hotkey-overlay-title="Application Launcher" {
         spawn "dms" "ipc" "call" "spotlight" "toggle";
     }
@@ -29,7 +29,7 @@ binds {
     Mod+Alt+L hotkey-overlay-title="Lock Screen" {
         spawn "dms" "ipc" "call" "lock" "lock";
     }
-    Mod+Shift+E { quit; }
+    Mod+Shift+M { quit; }
     Ctrl+Alt+Delete hotkey-overlay-title="Task Manager" {
         spawn "dms" "ipc" "call" "processlist" "focusOrToggle";
     }
@@ -139,6 +139,15 @@ binds {
     Mod+Ctrl+U         { move-column-to-workspace-down; }
     Mod+Ctrl+I         { move-column-to-workspace-up; }
 
+    Mod+B              { focus-workspace "Browser"; }
+    Mod+D              { focus-workspace "Chat"; }
+    Mod+C              { focus-workspace "Cfg"; }
+
+    // Move to last workspace
+    Mod+E              { focus-workspace 255; }
+    Mod+Shift+E        { move-column-to-workspace 255; }
+
+
     // === Workspace Management ===
     Ctrl+Shift+R hotkey-overlay-title="Rename Workspace" {
         spawn "dms" "ipc" "call" "workspace-rename" "open";
@@ -151,15 +160,15 @@ binds {
     Mod+Shift+I         { move-workspace-up; }
 
     // === Mouse Wheel Navigation ===
-    Mod+WheelScrollRight        { focus-workspace-down; }
-    Mod+WheelScrollLeft         { focus-workspace-up; }
-    Mod+Ctrl+WheelScrollRight   { move-column-to-workspace-down; }
-    Mod+Ctrl+WheelScrollLeft    { move-column-to-workspace-up; }
+    Mod+WheelScrollDown        cooldown-ms=150 { focus-workspace-down; }
+    Mod+WheelScrollUp          cooldown-ms=150 { focus-workspace-up; }
+    Mod+Ctrl+WheelScrollDown   cooldown-ms=150 { move-column-to-workspace-down; }
+    Mod+Ctrl+WheelScrollUp     cooldown-ms=150 { move-column-to-workspace-up; }
 
-    Mod+WheelScrollDown       cooldown-ms=150 { focus-column-right; }
-    Mod+WheelScrollUp         cooldown-ms=150 { focus-column-left; }
-    Mod+Ctrl+WheelScrollUp    cooldown-ms=150 { move-column-right; }
-    Mod+Ctrl+WheelScrollDown  cooldown-ms=150 { move-column-left; }
+    Mod+WheelScrollRight       { focus-column-right; }
+    Mod+WheelScrollLeft        { focus-column-left; }
+    Mod+Ctrl+WheelScrollRight  { move-column-right; }
+    Mod+Ctrl+WheelScrollLeft   { move-column-left; }
 
     Mod+Shift+WheelScrollDown      { focus-column-right; }
     Mod+Shift+WheelScrollUp        { focus-column-left; }
@@ -198,7 +207,7 @@ binds {
     // Mod+Shift+R { switch-preset-window-height; }
     // Mod+Ctjl+R { reset-window-height; }
     Mod+Ctrl+F { expand-column-to-available-width; }
-    Mod+C { center-column; }
+    // Mod+C { center-column; }
     Mod+Ctrl+C { center-visible-columns; }
 
     // === Manual Sizing ===

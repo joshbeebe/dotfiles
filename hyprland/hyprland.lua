@@ -12,9 +12,9 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("discord")
     hl.exec_cmd("code")
     hl.exec_cmd("ydotoold ~")
-    hl.exec_cmd("dms run")
-    -- hl.exec_cmd("waybar")
-    -- hl.exec_cmd("dunst")
+    -- hl.exec_cmd("dms run")
+    hl.exec_cmd("waybar")
+    hl.exec_cmd("dunst")
 end)
 
 -- Window rules

@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# Should consider replacing this with interception-tools
+
+# Not sure if this can change
+MOUSE="/dev/input/event3"
+
+evtest "$MOUSE" | while read -r line; do
+    if [[ "$line" == *"code 277"* ]]; then
+        if [[ "$line" == *"value 1"* ]]; then
+            # Fn1 pressed
+            ydotool click 0x42
+        elif [[ "$line" == *"value 0"* ]]; then
+            # Fn1 released
+            ydotool click 0x82
+        fi
+    elif [[ "$line" == *"code 278"* ]]; then
+        if [[ "$line" == *"value 1"* ]]; then
+            # Fn2 pressed
+            ~/dotfiles/bin/mouse_wiggle press
+        elif [[ "$line" == *"value 0"* ]]; then
+            # Fn2 released
+            ~/dotfiles/bin/mouse_wiggle release
+        fi
+    elif [[ "$line" == *"code 279"* ]]; then
+        if [[ "$line" == *"value 1"* ]]; then
+            # Fn3 pressed
+            ydotool click 0x42
+        elif [[ "$line" == *"value 0"* ]]; then
+            # Fn3 released
+            ydotool click 0x82
+        fi
+    fi
+done

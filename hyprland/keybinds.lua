@@ -12,6 +12,8 @@ hl.bind("SUPER + T", hl.dsp.exec_cmd("thunar"))
 hl.bind("SUPER + SHIFT + T", hl.dsp.workspace.toggle_special("FileManager"))
 
 hl.bind("SUPER + F", hl.dsp.window.float("toggle"))
+hl.bind("SUPER + SHIFT + F", hl.dsp.window.fullscreen())
+hl.bind("SUPER + P", hl.dsp.window.pin()) -- Pin a floating window
 
 hl.bind("SUPER + mouse:272", hl.dsp.window.drag())
 hl.bind("SUPER + mouse:273", hl.dsp.window.resize())
@@ -21,3 +23,23 @@ for i = 1, 10 do
     hl.bind("SUPER + " .. key, hl.dsp.focus({workspace = i}))
     hl.bind("SUPER + SHIFT + " .. key, hl.dsp.window.move({workspace = i, follow = false}))
 end
+
+
+-- Niri
+hl.bind("SUPER + Space", hl.dsp.exec_cmd("dms ipc call spotlight toggle"))
+
+-- Fn1
+hl.bind("mouse:277", hl.dsp.exec_cmd("ydotool click 0x42"))
+hl.bind("mouse:277", hl.dsp.exec_cmd("ydotool click 0x82"), {release = true})
+-- hl.bind("ALT + mouse:277", hl.dsp.exec_cmd("ydotool click 0x42"))
+-- hl.bind("ALT + mouse:277", hl.dsp.exec_cmd("ydotool click 0x82"), {release = true})
+
+--Fn 2
+-- hl.bind("mouse:278", hl.dsp.exec_cmd("~/dotfiles/bin/mouse_wiggle press"))
+-- hl.bind("mouse:278", hl.dsp.exec_cmd("~/dotfiles/bin/mouse_wiggle release"), {release = true})
+
+-- Fn3
+-- hl.bind("mouse:279", hl.dsp.exec_cmd("ydotool click 0x42"))
+-- hl.bind("mouse:279", hl.dsp.exec_cmd("ydotool click 0x82"), {release = true})
+-- hl.bind("mouse:279", hl.dsp.exec_cmd("~/dotfiles/bin/mouse_wiggle press"))
+-- hl.bind("mouse:279", hl.dsp.exec_cmd("~/dotfiles/bin/mouse_wiggle release"), {release = true})
