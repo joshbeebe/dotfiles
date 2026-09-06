@@ -103,6 +103,14 @@ dotfiles = Dotfiles([
             '99-Donner_Drums_MIDI.rules'
         ]
     ),
+    Dotfile(
+        name = 'ranger',
+        path = '~/.config/ranger',
+        local_path = '~/dotfiles/ranger',
+        files = [
+            'rc.conf'
+        ]
+    ),
     Dotfile('.bashrc'),
     Dotfile('.vimrc'),
     Dotfile('.xinitrc'),
