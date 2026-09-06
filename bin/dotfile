@@ -12,7 +12,7 @@ dotfiles = Dotfiles([
         local_path = '~/dotfiles/DankMaterialShell/',
         files = [
             'settings.json'
-        ]
+        ],
     ),
     Dotfile(
         name = 'wofi',
@@ -78,7 +78,8 @@ dotfiles = Dotfiles([
             'dms/outputs.kdl',
             'dms/windowrules.kdl',
             'dms/wpblur.kdl'
-        ]
+        ],
+        install_all=False
     ),
     Dotfile(
         name = 'dunst',
@@ -93,6 +94,14 @@ dotfiles = Dotfiles([
         path = '~/.config/quickshell',
         local_path='~/dotfiles/quickshell',
         files = []
+    ),
+    Dotfile(
+        name = 'udev',
+        path = '/usr/udev/rules.d',
+        local_path = '~/dotfiles/udev',
+        files = [
+            '99-Donner_Drums_MIDI.rules'
+        ]
     ),
     Dotfile('.bashrc'),
     Dotfile('.vimrc'),

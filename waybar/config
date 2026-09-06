@@ -47,8 +47,10 @@
         "capslock": true,
         "format": "{name} {icon}",
         "format-icons": {
-            "locked": "",
-            "unlocked": ""
+            //"locked": "",
+            //"unlocked": ""
+            "locked": "L",
+            "unlocked": "U"
         }
     },
     "wlr/mode": {

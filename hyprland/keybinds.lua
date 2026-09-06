@@ -15,6 +15,13 @@ hl.bind("SUPER + F", hl.dsp.window.float("toggle"))
 hl.bind("SUPER + SHIFT + F", hl.dsp.window.fullscreen())
 hl.bind("SUPER + P", hl.dsp.window.pin()) -- Pin a floating window
 
+hl.bind("SUPER + H", hl.dsp.focus({ direction = "left" }))
+hl.bind("SUPER + L", hl.dsp.focus({ direction = "right" }))
+hl.bind("SUPER + K", hl.dsp.focus({ direction = "up" }))
+hl.bind("SUPER + J", hl.dsp.focus({ direction = "down" }))
+
+hl.bind("SUPER + SHIFT + S", hl.dsp.exec_cmd("grim -g \"$(slurp)\" - | wl-copy"))
+
 hl.bind("SUPER + mouse:272", hl.dsp.window.drag())
 hl.bind("SUPER + mouse:273", hl.dsp.window.resize())
 
@@ -31,15 +38,15 @@ hl.bind("SUPER + Space", hl.dsp.exec_cmd("dms ipc call spotlight toggle"))
 -- Fn1
 hl.bind("mouse:277", hl.dsp.exec_cmd("ydotool click 0x42"))
 hl.bind("mouse:277", hl.dsp.exec_cmd("ydotool click 0x82"), {release = true})
--- hl.bind("ALT + mouse:277", hl.dsp.exec_cmd("ydotool click 0x42"))
--- hl.bind("ALT + mouse:277", hl.dsp.exec_cmd("ydotool click 0x82"), {release = true})
+hl.bind("ALT + mouse:277", hl.dsp.exec_cmd("ydotool click 0x42"))
+hl.bind("ALT + mouse:277", hl.dsp.exec_cmd("ydotool click 0x82"), {release = true})
 
 --Fn 2
--- hl.bind("mouse:278", hl.dsp.exec_cmd("~/dotfiles/bin/mouse_wiggle press"))
--- hl.bind("mouse:278", hl.dsp.exec_cmd("~/dotfiles/bin/mouse_wiggle release"), {release = true})
+hl.bind("mouse:278", hl.dsp.exec_cmd("~/dotfiles/bin/mouse_wiggle press"))
+hl.bind("mouse:278", hl.dsp.exec_cmd("~/dotfiles/bin/mouse_wiggle release"), {release = true})
 
 -- Fn3
 -- hl.bind("mouse:279", hl.dsp.exec_cmd("ydotool click 0x42"))
 -- hl.bind("mouse:279", hl.dsp.exec_cmd("ydotool click 0x82"), {release = true})
--- hl.bind("mouse:279", hl.dsp.exec_cmd("~/dotfiles/bin/mouse_wiggle press"))
--- hl.bind("mouse:279", hl.dsp.exec_cmd("~/dotfiles/bin/mouse_wiggle release"), {release = true})
+hl.bind("mouse:279", hl.dsp.exec_cmd("~/dotfiles/bin/mouse_wiggle press"))
+hl.bind("mouse:279", hl.dsp.exec_cmd("~/dotfiles/bin/mouse_wiggle release"), {release = true})
